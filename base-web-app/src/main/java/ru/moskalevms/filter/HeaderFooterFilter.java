@@ -18,6 +18,8 @@ public class HeaderFooterFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        servletResponse.setCharacterEncoding("utf-8");
+        servletResponse.setContentType("text/html");
         filterConfig.getServletContext().getRequestDispatcher("/header.html").include(servletRequest, servletResponse);
         filterChain.doFilter(servletRequest, servletResponse);
         filterConfig.getServletContext().getRequestDispatcher("/footer.html").include(servletRequest, servletResponse);
