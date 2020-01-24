@@ -9,6 +9,8 @@
 
 
 <h:body>
+    
+    <f:event listener="${productController.preloadProducts}" type="preRenderView"/>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">EShop</a>
@@ -21,8 +23,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">List</a>
-                <a class="navbar-brand" href="#">Cart</a>
+                <h:link styleClass="nav-link" outcome="#">List</h:link>
+            </li>
+            <li class="nav-item">
+                <h:link styleClass="nav-link"  outcome="${pageContext.request.contextPath}/cart">Cart</h:link>
             </li>
         </ul>
     </div>
@@ -57,6 +61,9 @@
                         <f:facet name="header">Action</f:facet>
                         <h:commandButton value="Edit" action="#{productController.editProducts(product)}" styleClass="mr-1"/>
                         <h:commandButton value="Delete" action="#{productController.deleteProducts(product)}" styleClass="mr-1">
+                            <f:ajax event="click" render="productsForm"/>
+                        </h:commandButton>
+                        <h:commandButton value="Add to cart" action="#{productController.addToCart(product)}" styleClass="mr-1">
                             <f:ajax event="click" render="productsForm"/>
                         </h:commandButton>
                     </h:column>

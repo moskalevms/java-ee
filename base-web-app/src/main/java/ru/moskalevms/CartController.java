@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CartController", urlPatterns = {"/", ""})
 public class CartController extends HttpServlet {
@@ -63,7 +65,7 @@ public class CartController extends HttpServlet {
             session.setAttribute("cart", cart);
         } else {
             List<Item> cart = (List<Item>) session.getAttribute("cart");
-            int index = isExisting(req.getParameter("id"), cart);
+            int index = productInCart(req.getParameter("id"), cart);
             if (index == -1){
                 cart.add(new Item(productRepository.findById(id), 1));
             }else {
@@ -78,7 +80,7 @@ public class CartController extends HttpServlet {
     protected void remove(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         List<Item> cart = (List<Item>) session.getAttribute("cart");
-        int index = isExisting(req.getParameter("id"), cart);
+        int index = productInCart(req.getParameter("id"), cart);
         cart.remove(index);
         session.setAttribute("cart", cart);
         try {
@@ -93,7 +95,7 @@ public class CartController extends HttpServlet {
         req.getRequestDispatcher("/cart.jsp").forward(req, resp);
     }
 
-    private int isExisting(String id, List<Item> cart){
+    private int productInCart(String id, List<Item> cart){
         for (int i = 0; i < cart.size(); i++){
             if (cart.get(i).getProduct().getId().equals(id)){
                 return i;

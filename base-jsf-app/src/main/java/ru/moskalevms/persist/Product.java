@@ -1,15 +1,24 @@
 package ru.moskalevms.persist;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
+@Table(name = "products")
+@Entity
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 4096, nullable = false)
     private String name;
 
+    @Column(length = 10000)
     private String description;
 
+    @Column
     private BigDecimal price;
 
     public Product() {
@@ -53,5 +62,18 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
