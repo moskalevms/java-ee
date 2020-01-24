@@ -4,22 +4,28 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-  <display-name>Archetype Created Web Application</display-name>
-  
+  <display-name>JSF Apllication</display-name>
+
   <servlet>
-    <servlet-name>HelloWorldServlet</servlet-name>
-    <servlet-class>ru.moskalevms.HelloWorldServlet</servlet-class>
+    <servlet-name>faces-servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
-  
+
   <servlet-mapping>
-    <servlet-name>HelloWorldServlet</servlet-name>
-    <url-pattern>helloworld</url-pattern>
+    <servlet-name>faces-servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+
 
   <context-param>
     <param-name>jdbcConnectionString</param-name>
     <param-value>jdbc:mysql://localhost:3306/javaee_test_db?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</param-value>
   </context-param>
+  
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
 
   <context-param>
     <param-name>dbUsername</param-name>
