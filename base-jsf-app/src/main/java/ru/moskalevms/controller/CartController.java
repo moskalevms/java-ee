@@ -2,7 +2,6 @@ package ru.moskalevms.controller;
 
 import ru.moskalevms.cart.CartService;
 import ru.moskalevms.cart.LineItem;
-import ru.moskalevms.persist.Item;
 import ru.moskalevms.persist.Product;
 
 import javax.enterprise.context.SessionScoped;
