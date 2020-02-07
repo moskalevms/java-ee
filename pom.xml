@@ -11,6 +11,8 @@
 
     <modules>
         <module>base-web-app</module>
+        <module>base-jsf-app</module>
+        <module>ejb-client</module>
     </modules>
 
 </project>
