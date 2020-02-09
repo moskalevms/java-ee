@@ -1,11 +1,14 @@
 package ru.moskalevms.persist;
 
+import ru.moskalevms.rest.ProductServiceRs;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.*;
@@ -15,7 +18,8 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 @Stateless
-public class ProductRepositoryImpl implements ProductRepository, ProductRepositoryRemote {
+@WebService(endpointInterface = "ru.moskalevms.persist.ProductRepositoryWs", serviceName = "ProductService")
+public class ProductRepositoryImpl implements ProductRepository, ProductRepositoryRemote, ProductRepositoryWs, ProductServiceRs {
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
@@ -58,7 +62,7 @@ public class ProductRepositoryImpl implements ProductRepository, ProductReposito
         return em.createQuery(" from Product", Product.class).getResultList();
     }
 
-    @Asynchronous
+  @Asynchronous
     @Override
     public Future<List<Product>> findAllAsync() {
         try {

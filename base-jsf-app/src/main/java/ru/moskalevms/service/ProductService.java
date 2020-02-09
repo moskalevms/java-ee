@@ -1,7 +1,9 @@
-package ru.moskalevms.persist;
+package ru.moskalevms.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.moskalevms.persist.Product;
+import ru.moskalevms.persist.ProductRepositoryImpl;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -11,9 +13,9 @@ import javax.persistence.PersistenceContext;
 
 
 @Stateless
-public class ProductDAO {
+public class ProductService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductDAO.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
