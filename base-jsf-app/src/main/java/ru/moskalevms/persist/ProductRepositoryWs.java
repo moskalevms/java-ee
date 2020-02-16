@@ -9,4 +9,8 @@ public interface ProductRepositoryWs {
 
     @WebMethod
     List<Product> findAll();
+
+    @WebMethod
+    Product findById(long id);
+
 }

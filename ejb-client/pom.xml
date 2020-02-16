@@ -39,6 +39,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-jms-client-bom</artifactId>
+            <type>pom</type>
+            <version>17.0.1.Final</version>
+        </dependency>
+
     </dependencies>
 
 
